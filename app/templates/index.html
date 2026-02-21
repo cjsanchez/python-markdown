@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Markdown Preview</title>
+
+    <style>
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #0b0f19;
+        color: #e8eaf0;
+      }
+      header {
+        padding: 16px 20px;
+        border-bottom: 1px solid #20263a;
+        background: #0b0f19;
+        position: sticky;
+        top: 0;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 650;
+      }
+      .wrap {
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: #111832;
+        border: 1px solid #20263a;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      }
+      .card h2 {
+        margin: 0;
+        padding: 12px 14px;
+        font-size: 14px;
+        letter-spacing: 0.2px;
+        border-bottom: 1px solid #20263a;
+        color: #cfd6ff;
+        background: #0f1630;
+      }
+      textarea {
+        width: 100%;
+        min-height: 520px;
+        resize: vertical;
+        border: 0;
+        outline: none;
+        padding: 14px;
+        background: #0b1024;
+        color: #e8eaf0;
+        font-size: 14px;
+        line-height: 1.45;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+          "Courier New", monospace;
+      }
+      .preview {
+        padding: 14px;
+        background: #0b1024;
+      }
+
+      /* Simple markdown-ish styling */
+      .preview h1, .preview h2, .preview h3 {
+        margin-top: 1.1em;
+        margin-bottom: 0.4em;
+      }
+      .preview p { line-height: 1.6; }
+      .preview code {
+        background: rgba(255,255,255,0.06);
+        padding: 2px 5px;
+        border-radius: 6px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+          "Courier New", monospace;
+      }
+      .preview pre {
+        background: rgba(255,255,255,0.06);
+        padding: 12px;
+        border-radius: 10px;
+        overflow: auto;
+      }
+      .preview blockquote {
+        border-left: 3px solid #6a7cff;
+        padding-left: 12px;
+        margin-left: 0;
+        color: #cbd2ff;
+        opacity: 0.95;
+      }
+      .preview a { color: #8ea0ff; }
+      .preview hr {
+        border: 0;
+        border-top: 1px solid #20263a;
+        margin: 16px 0;
+      }
+
+      .toolbar {
+        display: flex;
+        gap: 10px;
+        padding: 10px 14px;
+        border-top: 1px solid #20263a;
+        background: #0f1630;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .btn {
+        background: #1b2a66;
+        border: 1px solid #2a3a88;
+        color: #e8eaf0;
+        padding: 8px 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .btn:hover { filter: brightness(1.08); }
+      .muted { color: #aab3dd; font-size: 12px; }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Markdown Preview (FastAPI)</h1>
+    </header>
+
+    <div class="wrap">
+      <div class="grid">
+        <div class="card">
+          <h2>Markdown Input</h2>
+          <textarea id="mdInput" spellcheck="false"># Hello 👋
+
+Type **Markdown** on the left.
+
+- Lists
+- `inline code`
+
+```python
+print("code blocks")
+</textarea>
+          <div class="toolbar">
+            <div class="muted">Live preview updates as you type.</div>
+            <div style="display:flex; gap:10px;">
+              <button class="btn" id="btnClear" type="button">Clear</button>
+              <button class="btn" id="btnServer" type="button">Render via server</button>
+            </div>
+          </div>
+        </div>
+    <div class="card">
+      <h2>Preview</h2>
+      <div class="preview" id="preview"></div>
+      <div class="toolbar">
+        <div class="muted" id="modeLabel">Mode: client-side</div>
+        <div class="muted">Tip: server mode calls <code>/render</code>.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Client-side markdown renderer -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="/static/app.js"></script>
+  </body>
+</html>
+```
