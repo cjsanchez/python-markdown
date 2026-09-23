@@ -1,4 +1,4 @@
-FROM docker.io/python:3.12.12-alpine3.23
+FROM docker.io/python:3.11
 
 COPY . /app
 
